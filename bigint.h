@@ -139,7 +139,7 @@ class bigint {
         /* Operator {+} Overloadings, for different kind of 
         parameter for the programmer's convinience  */
 
-        bigint operator + (bigint const &n) {
+        bigint operator + (bigint const &n) const {
             bigint ans;
             ans.str = add(str, n.str);
             return ans;
@@ -187,7 +187,7 @@ class bigint {
         /* Operator {-} Overloadings, for different kind of 
         parameter for the programmer's convinience  */
 
-        bigint operator - (bigint const &n) {
+        bigint operator - (bigint const &n) const {
             bigint ans;
             ans.str = subtract(str, n.str);
             return ans;
@@ -234,7 +234,7 @@ class bigint {
         /* Operator {*} Overloadings, for different kind of 
         parameter for the programmer's convinience  */
 
-        bigint operator * (bigint const &n) {
+        bigint operator * (bigint const &n) const {
             bigint ans;
             ans.str = multiply(str, n.str);
             return ans;
@@ -279,7 +279,7 @@ class bigint {
         /* Operator {/} Overloadings, for different kind of 
         parameter for the programmer's convinience  */
 
-        bigint operator / (bigint const &n) {
+        bigint operator / (bigint const &n) const {
             bigint ans;
             ans.str = divide(str, n.str);
             return ans;
@@ -325,7 +325,7 @@ class bigint {
         /* Operator {%} Overloadings, for different kind of 
         parameter for the programmer's convinience  */
 
-        bigint operator % (bigint const &n) {
+        bigint operator % (bigint const &n) const {
             bigint ans;
             ans.str = mod(str, n.str);
             return ans;
@@ -406,7 +406,7 @@ class bigint {
         /* Operator {>} Overloadings, for different kind of 
         parameter for the programmer's convinience  */
 
-        bool operator > (bigint const &n) {
+        bool operator > (bigint const &n) const {
             return is_strictlyMaximum(str, n.str);
         }
         friend bool operator > (bigint const &n1, int n2) {
@@ -431,7 +431,7 @@ class bigint {
         /* Operator {<} Overloadings, for different kind of 
         parameter for the programmer's convinience  */
 
-        bool operator < (bigint const &n) {
+        bool operator < (bigint const &n) const {
             return is_strictlyMinimum(str, n.str);
         }
         friend bool operator < (bigint const &n1, int n2) {
@@ -456,7 +456,7 @@ class bigint {
         /* Operator {>=} Overloadings, for different kind of 
         parameter for the programmer's convinience  */
 
-        bool operator >= (bigint const &n) {
+        bool operator >= (bigint const &n) const {
             return is_maximum(str, n.str);
         }
         friend bool operator >= (bigint const &n1, int n2) {
@@ -481,7 +481,7 @@ class bigint {
         /* Operator {<=} Overloadings, for different kind of 
         parameter for the programmer's convinience  */
 
-        bool operator <= (bigint const &n) {
+        bool operator <= (bigint const &n) const {
             return is_minimum(str, n.str);
         }
         friend bool operator <= (bigint const &n1, int n2) {
@@ -507,7 +507,7 @@ class bigint {
         /* Operator {==} Overloadings, for different kind of 
         parameter for the programmer's convinience  */
 
-        bool operator ==(bigint const &n) {
+        bool operator == (bigint const &n) const {
             return (*this).str == n.str;
         }
         friend bool operator == (bigint const &n1, int n2) {
@@ -533,7 +533,7 @@ class bigint {
         /* Operator {!=} Overloadings, for different kind of 
         parameter for the programmer's convinience  */
 
-        bool operator !=(bigint const &n) {
+        bool operator != (bigint const &n) const {
             return (*this).str != n.str;
         }
         friend bool operator != (bigint const &n1, int n2) {
@@ -975,12 +975,12 @@ std::string bigint::shortDivide(std::string s1, unsigned long long int divisor) 
     int idx = 0;
     long long int temp = s1[idx] - '0';
     
-    while (temp < divisor) {
+    while ((unsigned long long int)temp < divisor) {
         temp = temp*10 + (s1[++idx] - '0');
-        if(idx >= s1.length())
+        if((unsigned long long int)idx >= s1.length())
             break;
     }
-    while (s1.length() > idx) {
+    while (s1.length() > (unsigned long long int)idx) {
         ans += (temp / divisor) + '0';
         temp = (temp % divisor)*10 + s1[++idx] - '0';
     }
